@@ -4,12 +4,21 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 
 public class Util {
+    /**
+     * 账户密码加密
+     * @param username
+     * @param pwd
+     * @return
+     */
     public static String MD5Pwd(String username, String pwd) {
-        // 加密算法MD5
-        // salt盐 username + salt
-        // 迭代次数
-        String md5Pwd = new SimpleHash("MD5", pwd,
-                ByteSource.Util.bytes(username + "salt"), 2).toHex();
-        return md5Pwd;
+        String hashAlgorithmName = "MD5";//加密方式
+        Object crdentials = pwd;//密码原值
+        ByteSource salt = ByteSource.Util.bytes(username);//以账号作为盐值
+        int hashIterations = 1024;//加密1024次
+        return new SimpleHash(hashAlgorithmName,crdentials,salt,hashIterations).toString();
+
+    }
+    public static void main(String[] args) {
+        System.out.println(MD5Pwd("aa","123"));
     }
 }

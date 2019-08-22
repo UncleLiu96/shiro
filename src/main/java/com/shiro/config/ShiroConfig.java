@@ -2,6 +2,7 @@ package com.shiro.config;
 
 
 import com.shiro.realm.CustomRealm;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
@@ -57,8 +58,12 @@ public class ShiroConfig {
     @Bean
     public CustomRealm customRealm() {
         CustomRealm customRealm = new CustomRealm();
+        // 告诉realm,使用credentialsMatcher加密算法类来验证密文
+        customRealm.setCredentialsMatcher(hashedCredentialsMatcher());
+        customRealm.setCachingEnabled(false);
         return customRealm;
     }
+
 
     @Bean
     public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
@@ -86,6 +91,23 @@ public class ShiroConfig {
         authorizationAttributeSourceAdvisor.setSecurityManager(securityManager());
         return authorizationAttributeSourceAdvisor;
     }
+
+    /**
+     * 加密配置
+     * @return
+     */
+    @Bean(name = "credentialsMatcher")
+    public HashedCredentialsMatcher hashedCredentialsMatcher() {
+        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
+        // 散列算法:这里使用MD5算法;
+        hashedCredentialsMatcher.setHashAlgorithmName("md5");
+        // 散列的次数，比如散列两次，相当于 md5(md5(""));
+        hashedCredentialsMatcher.setHashIterations(1024);
+        // storedCredentialsHexEncoded默认是true，此时用的是密码加密用的是Hex编码；false时用Base64编码
+        hashedCredentialsMatcher.setStoredCredentialsHexEncoded(true);
+        return hashedCredentialsMatcher;
+    }
+
 
 }
 
