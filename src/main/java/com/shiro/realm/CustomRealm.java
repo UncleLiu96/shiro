@@ -48,7 +48,7 @@ public class CustomRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         System.out.println("-------身份认证方法--------");
         String userName = (String) authenticationToken.getPrincipal();
-//        String userPwd = new String((char[]) authenticationToken.getCredentials());
+        String userPwd = new String((char[]) authenticationToken.getCredentials());
         //根据用户名从数据库获取密码
         String password = "89267a06ce552c28e3edc11be28e4f80"; //  使用明文密码：123加密后
 //        if (userName == null) {

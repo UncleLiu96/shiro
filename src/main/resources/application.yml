@@ -1,4 +1,10 @@
-#thymeleafÄ£°å
+server:
+  port: 80
+  servlet:
+    context-path: /
+
+
+#thymeleafæ¨¡æ¿
 spring:
   thymeleaf:
     cache: true
