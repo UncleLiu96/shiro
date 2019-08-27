@@ -1,6 +1,7 @@
 package com.shiro.config;
 
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import com.shiro.realm.CustomRealm;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
@@ -114,7 +115,10 @@ public class ShiroConfig {
     }
 
 
-
+    @Bean
+    public ShiroDialect shiroDialect(){
+        return new ShiroDialect();
+    }
 
 }
 
