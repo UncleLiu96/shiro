@@ -18,8 +18,8 @@
     <img alt="验证码" onclick="this.src='/kaptcha/defaultKaptcha?d='+new Date()*1" src="/kaptcha/defaultKaptcha" />
 </div>
 <form action="/login" method="post">
-    账户：<input type="text" name="username" /></br>
-    密码：<input type="text" name="password" /></br>
+    账户：<input type="text" name="username" value="admin" /></br>
+    密码：<input type="text" name="password" value="123456"/></br>
     验证码：<input type="text" name="tryCode" />
     <input type="submit" value="提交" ></input>
 </form>

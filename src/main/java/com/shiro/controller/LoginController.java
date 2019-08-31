@@ -1,6 +1,9 @@
 package com.shiro.controller;
 
 
+import com.shiro.annotation.Log;
+import com.shiro.enums.OperationType;
+import com.shiro.enums.OperationUnit;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -23,7 +26,7 @@ public class LoginController {
      * 界面
      * @return
      */
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = {"/login","/"}, method = RequestMethod.GET)
     public String defaultLogin() {
         return "login";
     }
@@ -47,11 +50,13 @@ public class LoginController {
      * @param redirectAttributes
      * @return
      */
+    @Log(detail = "登录提交",level = 1,operationUnit = OperationUnit.USER,operationType = OperationType.SELECT)
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(@RequestParam("username") String username,
                         @RequestParam("tryCode") String tryCode,
                         @RequestParam("password") String password,
                         RedirectAttributes redirectAttributes) {
+
         //判断验证码
         if(StringUtils.isBlank(tryCode)){
             logger.info("验证码为空了！");
@@ -88,6 +93,8 @@ public class LoginController {
         }finally {
             redirectAttributes.addFlashAttribute("message", attributeValue);
             if (subject.isAuthenticated()) {
+
+                logger.info("登录成功");
                 return "success";
             } else {
                 token.clear();

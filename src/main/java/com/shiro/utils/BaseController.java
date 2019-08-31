@@ -1,5 +1,6 @@
 package com.shiro.utils;
 
+import com.shiro.annotation.Log;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
