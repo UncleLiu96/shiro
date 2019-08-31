@@ -3,8 +3,8 @@
 <mapper namespace="com.shiro.mapper.SystemLogMapper">
 
     <insert id="addLog">
-        INSERT INTO SYSTEM_LOG(id,log_level,operation_unit,method,args,user_id,user_name,log_describe,operation_type,run_time,return_value)
-          VALUE(#{id},#{logLevel},#{operationUnit},#{method},#{args},#{userId},#{userName},#{logDescribe},#{operationType},#{runTime},#{returnValue});
+        INSERT INTO SYSTEM_LOG(id,log_level,operation_unit,method,args,user_id,user_name,log_describe,operation_type,run_time,return_value,ip_address)
+          VALUE(#{id},#{logLevel},#{operationUnit},#{method},#{args},#{userId},#{userName},#{logDescribe},#{operationType},#{runTime},#{returnValue},#{ipAddress});
     </insert>
 
 </mapper>

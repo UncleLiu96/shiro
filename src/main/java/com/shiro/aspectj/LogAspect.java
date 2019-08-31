@@ -5,6 +5,7 @@ import com.shiro.annotation.Log;
 import com.shiro.pojo.SystemLog;
 import com.shiro.pojo.SystemUser;
 import com.shiro.service.ISystemLogService;
+import com.shiro.utils.IpUtils;
 import org.apache.shiro.SecurityUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -66,6 +67,9 @@ public class LogAspect {
         SystemUser systemUser = (SystemUser) SecurityUtils.getSubject().getPrincipal();
         MethodSignature signature = (MethodSignature)joinPoint.getSignature();
         SystemLog operationLog = new SystemLog();
+        //获取内网地址IpUtils.intranetIp()
+        //获取外网地址IpUtils.internetIp()
+        operationLog.setIpAddress(IpUtils.intranetIp());
         operationLog.setRunTime(time);
         operationLog.setReturnValue(JSONObject.toJSONString(res));
         operationLog.setId(UUID.randomUUID().toString());

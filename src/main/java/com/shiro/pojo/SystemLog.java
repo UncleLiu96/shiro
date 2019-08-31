@@ -54,6 +54,18 @@ public class SystemLog {
      * 方法返回值
      */
     private String returnValue;
+    /**
+     * IP地址
+     */
+    private String ipAddress;
+
+    public String getIpAddress() {
+        return ipAddress;
+    }
+
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
+    }
 
     public String getId() {
         return id;
